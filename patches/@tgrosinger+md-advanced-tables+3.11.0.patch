@@ -1,0 +1,18 @@
+diff --git a/node_modules/@tgrosinger/md-advanced-tables/lib/calc/constant.js b/node_modules/@tgrosinger/md-advanced-tables/lib/calc/constant.js
+index 64a8154..f546245 100755
+--- a/node_modules/@tgrosinger/md-advanced-tables/lib/calc/constant.js
++++ b/node_modules/@tgrosinger/md-advanced-tables/lib/calc/constant.js
+@@ -15,6 +15,13 @@ class Constant {
+             this.value = multiplier * parseInt(ast.children[0].text);
+         }
+         else {
++            if (ast.children[0].text.includes(',')) {
++              ast.children[0].text = ast.children[0].text.replace(',', '.');
++            }
++            if (ast.children[1].text.includes(',')) {
++              ast.children[1].text = ast.children[1].text.replace(',', '.');
++            }
++            
+             this.value =
+                 multiplier *
+                     parseFloat(ast.children[0].text + '.' + ast.children[1].text);

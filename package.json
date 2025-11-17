@@ -5,9 +5,10 @@
   "main": "main.js",
   "scripts": {
     "dev": "node esbuild.config.mjs",
-    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "build": "patch-package && tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
     "prettier": "prettier --write 'src/**/*.+(ts|tsx|json|html|css)'",
-    "eslint": "eslint . --ext .ts,.tsx --fix"
+    "eslint": "eslint . --ext .ts,.tsx --fix",
+    "postinstall": "patch-package"
   },
   "keywords": [],
   "author": "Tony Grosinger",
@@ -31,6 +32,7 @@
     "typescript": "5.3.3"
   },
   "dependencies": {
-    "@tgrosinger/md-advanced-tables": "3.11.0"
+    "@tgrosinger/md-advanced-tables": "3.11.0",
+    "patch-package": "^8.0.1"
   }
 }

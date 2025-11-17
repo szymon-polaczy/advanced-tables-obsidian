@@ -1,0 +1,50 @@
+diff --git a/node_modules/decimal.js/decimal.js b/node_modules/decimal.js/decimal.js
+index 6a9658d..94a0907 100644
+--- a/node_modules/decimal.js/decimal.js
++++ b/node_modules/decimal.js/decimal.js
+@@ -3617,27 +3617,32 @@
+     } else if (isOctal.test(str))  {
+       base = 8;
+     } else {
+-      throw Error(invalidArgument + str);
++      base = 10;
++      //throw Error(invalidArgument + str);
+     }
+ 
+     // Is there a binary exponent part?
+-    i = str.search(/p/i);
++    /*i = str.search(/p/i);
+ 
+     if (i > 0) {
+       p = +str.slice(i + 1);
+       str = str.substring(2, i);
+     } else {
+       str = str.slice(2);
+-    }
++    }*/
+ 
+     // Convert `str` as an integer then divide the result by `base` raised to a power such that the
+     // fraction part will be restored.
+     i = str.indexOf('.');
++    if (i < 0) {
++      i = str.indexOf(',');
++    }
++
+     isFloat = i >= 0;
+     Ctor = x.constructor;
+ 
+     if (isFloat) {
+-      str = str.replace('.', '');
++      str = str.replace(',', '.').replace('.', '');
+       len = str.length;
+       i = len - i;
+ 
+@@ -3664,7 +3669,7 @@
+     if (isFloat) x = divide(x, divisor, len * 4);
+ 
+     // Multiply by the binary exponent part if present.
+-    if (p) x = x.times(Math.abs(p) < 54 ? mathpow(2, p) : Decimal.pow(2, p));
++    //if (p) x = x.times(Math.abs(p) < 54 ? mathpow(2, p) : Decimal.pow(2, p));
+     external = true;
+ 
+     return x;
